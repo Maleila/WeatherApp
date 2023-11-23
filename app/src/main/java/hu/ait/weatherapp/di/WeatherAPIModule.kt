@@ -11,6 +11,9 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
+//I think this is redundant w WeatherAPIService??
+//unless this is strictly a hilt thing?
+
 @Module
 @InstallIn(SingletonComponent::class)
 object WeatherAPIModule {
