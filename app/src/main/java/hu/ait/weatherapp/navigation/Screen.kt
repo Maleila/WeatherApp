@@ -2,6 +2,6 @@ package hu.ait.weatherapp.navigation
 
 sealed class Screen(val route: String) {
     object Main : Screen("main")
-//    object NasaMarsAPI : Screen("nasamars")
+    object WeatherAPI : Screen("weatherapi")
 //    object MoneyRatesAPI : Screen("moneyrates")
 }

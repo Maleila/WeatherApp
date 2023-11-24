@@ -11,7 +11,7 @@ import retrofit2.http.Query
 // http://data.fixer.io/api/latest?access_key=969c37b5a73f8cb2d12c081dcbdc35e6
 
 private const val BASE_URL =
-    "http://data.fixer.io/" //is this what you modify w the right API?
+    "https://api.openweathermap.org/"
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
@@ -28,6 +28,8 @@ object WeatherAPI {
 }
 
 interface WeatherApiService {
-    @GET("api/latest")
-    suspend fun getRates(@Query("access_key") access_key: String): WeatherResult
+    @GET("data/3.0/onecall?")
+    suspend fun getWeather(@Query("lat") lat: String,
+                           @Query("lon") lon: String,
+                           @Query("appid") appid: String): WeatherResult
 }

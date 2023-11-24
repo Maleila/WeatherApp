@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import hu.ait.weatherapp.ui.screen.CitesScreen
+import hu.ait.weatherapp.ui.screen.WeatherApiScreen
 
 @Composable
 fun NavGraph(
@@ -17,21 +18,15 @@ fun NavGraph(
     ) {
         composable(Screen.Main.route) {
             CitesScreen(
-//                onNasaMarsAPISelected = {
-//                    // navigate to the main messages screen
-//                    navController.navigate(Screen.NasaMarsAPI.route)
-//                },
-//                onMoneyAPISelected = {
-//                    navController.navigate(Screen.MoneyRatesAPI.route)
-//                }
+                onNavigateToWeatherScreen = {
+                    // navigate to the main messages screen
+                    navController.navigate(Screen.WeatherAPI.route)
+                },
             )
         }
-//        composable(Screen.NasaMarsAPI.route) {
-//            NasaMarsApiScreen()
-//        }
-//        composable(Screen.MoneyRatesAPI.route) {
-//            MoneyApiScreen()
-//        }
+        composable(Screen.WeatherAPI.route) {
+            WeatherApiScreen()
+        }
     }
 }
 

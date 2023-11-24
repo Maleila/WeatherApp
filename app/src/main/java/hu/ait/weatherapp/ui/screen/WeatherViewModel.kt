@@ -21,15 +21,15 @@ class WeatherViewModel(): ViewModel() {
     var weatherUiState: WeatherUiState by mutableStateOf(WeatherUiState.Loading)
 
     init {
-//        getWeather("969c37b5a73f8cb2d12c081dcbdc35e6") //replace w actual api key
+        getWeather("cbb0b0b9a1d9bc8b0fbff1d332b10379")
     }
 
     fun getWeather(accessKey: String) {
         weatherUiState = WeatherUiState.Loading
         viewModelScope.launch {
             weatherUiState = try {
-                val result = WeatherAPI.retrofitService.getRates(
-                    accessKey
+                val result = WeatherAPI.retrofitService.getWeather(
+                    accessKey, "47.0", "19.0"
                 )
                 WeatherUiState.Success(result)
             } catch (e: IOException) {

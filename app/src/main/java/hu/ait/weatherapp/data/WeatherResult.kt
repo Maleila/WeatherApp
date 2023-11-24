@@ -7,12 +7,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WeatherResult(
-    @SerialName("base")
-    val base: String? = null,
-    @SerialName("date")
-    val date: String? = null,
+//    @SerialName("date")
+//    val date: String? = null,
     @SerialName("success")
     val success: Boolean? = null,
-    @SerialName("timestamp")
-    val timestamp: Int? = null
+//    @SerialName("timestamp")
+//    val timestamp: Int? = null,
+    @SerialName("current.temp")
+    val temp: Int? = null,
 )

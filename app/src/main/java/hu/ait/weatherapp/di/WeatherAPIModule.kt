@@ -21,7 +21,7 @@ object WeatherAPIModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://data.fixer.io/")// server address
+            .baseUrl("https://api.openweathermap.org/")// server address
             .addConverterFactory(Json{ ignoreUnknownKeys = true }.asConverterFactory("application/json".toMediaType()) )
             //.addConverterFactory(ScalarsConverterFactory.create()) // row strings results
             .build()
@@ -29,7 +29,7 @@ object WeatherAPIModule {
 
     @Provides
     @Singleton
-    fun provideMoneyAPI(retrofit: Retrofit): WeatherAPI {
+    fun provideWeatherAPI(retrofit: Retrofit): WeatherAPI {
         return retrofit.create(WeatherAPI::class.java)
     }
 }

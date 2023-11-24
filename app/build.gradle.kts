@@ -5,6 +5,8 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
 android {
@@ -86,13 +88,6 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-
-//    // Retrofit
-//    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
-//    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
-//
-//    implementation("io.coil-kt:coil-compose:2.1.0")
 
     // Retrofit
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
