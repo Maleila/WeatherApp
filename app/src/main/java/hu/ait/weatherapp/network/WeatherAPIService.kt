@@ -10,6 +10,8 @@ import retrofit2.http.Query
 
 // http://data.fixer.io/api/latest?access_key=969c37b5a73f8cb2d12c081dcbdc35e6
 
+//https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+
 private const val BASE_URL =
     "https://api.openweathermap.org/"
 
@@ -28,8 +30,9 @@ object WeatherAPI {
 }
 
 interface WeatherApiService {
-    @GET("data/3.0/onecall?")
+    @GET("data/2.5/weather")
     suspend fun getWeather(@Query("lat") lat: String,
                            @Query("lon") lon: String,
-                           @Query("appid") appid: String): WeatherResult
+                           @Query("appid") appid: String,
+                           @Query("units") units: String): WeatherResult
 }

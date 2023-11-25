@@ -12,7 +12,6 @@ import javax.inject.Inject
 class CitiesViewModel @Inject constructor() : ViewModel() {
 
     private val cityList = mutableStateListOf<String>()
-    //double check how we did this w/o room/dao
 
     fun getAllCities(): List<String> {
         return cityList
@@ -23,7 +22,7 @@ class CitiesViewModel @Inject constructor() : ViewModel() {
     }
 
     fun removeItem(city: String) {
-        cityList.remove(city) //can't remember the syntax for kotlin
+        cityList.remove(city)
     }
 
     fun clearAllCities() {

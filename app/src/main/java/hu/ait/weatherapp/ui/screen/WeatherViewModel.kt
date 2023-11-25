@@ -21,22 +21,27 @@ class WeatherViewModel(): ViewModel() {
     var weatherUiState: WeatherUiState by mutableStateOf(WeatherUiState.Loading)
 
     init {
-        getWeather("cbb0b0b9a1d9bc8b0fbff1d332b10379")
+        getWeather("49324e494e65ef3e90e3497c07badf50")
     }
 
     fun getWeather(accessKey: String) {
         weatherUiState = WeatherUiState.Loading
         viewModelScope.launch {
-            weatherUiState = try {
+//            weatherUiState = try {
+//                val result = WeatherAPI.retrofitService.getWeather(
+//                    "47.00", "19.00", accessKey)
+//                WeatherUiState.Success(result)
+//            } catch (e: IOException) {
+//                WeatherUiState.Error
+//            } catch (e: HttpException) {
+//                WeatherUiState.Error
+//            }
+
+
                 val result = WeatherAPI.retrofitService.getWeather(
-                    accessKey, "47.0", "19.0"
-                )
-                WeatherUiState.Success(result)
-            } catch (e: IOException) {
-                WeatherUiState.Error
-            } catch (e: HttpException) {
-                WeatherUiState.Error
-            }
+                    "47.00", "19.00", accessKey, "imperial")
+                weatherUiState = WeatherUiState.Success(result)
+
         }
     }
 }
