@@ -15,13 +15,15 @@ import hu.ait.weatherapp.data.WeatherResult
 
 @Composable
 fun WeatherApiScreen(
+    q: String,
     weatherViewModel: WeatherViewModel = viewModel()
 ) {
+
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Button(onClick = {
-            weatherViewModel.getWeather("49324e494e65ef3e90e3497c07badf50")
+            weatherViewModel.getWeather("49324e494e65ef3e90e3497c07badf50", q)
         }) {
             Text(text = "Refresh")
         }
@@ -51,5 +53,3 @@ fun ResultScreen(weatherResults: WeatherResult) {
         Text(text = "Humidity: ${weatherResults.main?.humidity}")
     }
 }
-
-//(current temperature, description, weather icon, min and max temperature, humidity, sunrise and sunset, etc.)

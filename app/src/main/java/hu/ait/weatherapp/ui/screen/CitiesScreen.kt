@@ -53,7 +53,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CitesScreen(
-    onNavigateToWeatherScreen: () -> Unit,
+    onNavigateToWeatherScreen: (String) -> Unit,
     citiesViewModel: CitiesViewModel = hiltViewModel()
 ) {
 
@@ -84,10 +84,6 @@ fun CitesScreen(
 
         Column(modifier = Modifier.padding(10.dp)) {
 
-            Button(onClick = { onNavigateToWeatherScreen() }) {
-                Text(text = "Placeholder}")
-            }
-
             if (showAddCityDialog) {
                 AddNewCityForm(
                     citiesViewModel,
@@ -102,6 +98,7 @@ fun CitesScreen(
                     items(citiesViewModel.getAllCities()) {
                         ItemCard(city = it,
                             onRemoveItem = { citiesViewModel.removeItem(it) },
+                            onCardClicked = { onNavigateToWeatherScreen(it) }
                         )
                     }
                 }
@@ -114,6 +111,7 @@ fun CitesScreen(
 fun ItemCard(
     city: String,
     onRemoveItem: () -> Unit = {},
+    onCardClicked: () -> Unit = {}
 ) {
     Card(
         colors = CardDefaults.cardColors(
@@ -124,6 +122,7 @@ fun ItemCard(
             defaultElevation = 10.dp
         ),
         modifier = Modifier.padding(10.dp)
+            .clickable { onCardClicked() }
     ) {
         Column(
             modifier = Modifier.padding(20.dp)

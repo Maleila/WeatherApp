@@ -20,11 +20,14 @@ class WeatherViewModel(): ViewModel() {
 
     var weatherUiState: WeatherUiState by mutableStateOf(WeatherUiState.Loading)
 
-    init {
-        getWeather("49324e494e65ef3e90e3497c07badf50")
-    }
+    //won't work since I can't pass in q as a parameter to the viewmodel
+    //instead should have the equivalent of an init to call getWeather from the weatherapiscreen
+    //not sure what that is tho...
+//    init {
+//        getWeather("49324e494e65ef3e90e3497c07badf50", q)
+//    }
 
-    fun getWeather(accessKey: String) {
+    fun getWeather(accessKey: String, q: String) {
         weatherUiState = WeatherUiState.Loading
         viewModelScope.launch {
 //            weatherUiState = try {
@@ -39,7 +42,7 @@ class WeatherViewModel(): ViewModel() {
 
 
                 val result = WeatherAPI.retrofitService.getWeather(
-                    "47.00", "19.00", accessKey, "imperial")
+                    q, accessKey, "imperial")
                 weatherUiState = WeatherUiState.Success(result)
 
         }

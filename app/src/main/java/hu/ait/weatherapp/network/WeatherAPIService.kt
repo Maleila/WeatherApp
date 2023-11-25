@@ -31,8 +31,7 @@ object WeatherAPI {
 
 interface WeatherApiService {
     @GET("data/2.5/weather")
-    suspend fun getWeather(@Query("lat") lat: String,
-                           @Query("lon") lon: String,
+    suspend fun getWeather(@Query("q") q: String,
                            @Query("appid") appid: String,
                            @Query("units") units: String): WeatherResult
 }
