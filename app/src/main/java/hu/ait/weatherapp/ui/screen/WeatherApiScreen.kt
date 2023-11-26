@@ -10,6 +10,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +27,9 @@ fun WeatherApiScreen(
     q: String,
     weatherViewModel: WeatherViewModel = viewModel()
 ) {
+    LaunchedEffect(true) {
+        weatherViewModel.getWeather("49324e494e65ef3e90e3497c07badf50", q)
+    }
 
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
