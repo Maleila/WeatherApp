@@ -4,13 +4,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import hu.ait.weatherapp.data.WeatherResult
 
 @Composable
@@ -43,7 +51,17 @@ fun ResultScreen(weatherResults: WeatherResult) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(text = "WEATHER")
-        //icon
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data("https://openweathermap.org/img/w/${
+                    weatherResults.weather?.get(0)?.icon
+                }.png")
+                .crossfade(true)
+                .build(),
+            contentDescription = "Image",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size(100.dp).clip(CircleShape)
+        )
         Text(text = "Place: ${weatherResults.name}")
         Text(text = "Current temperature: ${weatherResults.main?.temp}")
         Text(text = "Feels like: ${weatherResults.main?.feels_like}")
