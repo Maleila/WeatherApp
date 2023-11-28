@@ -16,35 +16,23 @@ sealed interface WeatherUiState {
     object Error : WeatherUiState
     object Loading : WeatherUiState
 }
+
 class WeatherViewModel(): ViewModel() {
 
     var weatherUiState: WeatherUiState by mutableStateOf(WeatherUiState.Loading)
 
-    //won't work since I can't pass in q as a parameter to the viewmodel
-    //instead should have the equivalent of an init to call getWeather from the weatherapiscreen
-    //not sure what that is tho...
-//    init {
-//        getWeather("49324e494e65ef3e90e3497c07badf50", q)
-//    }
-
     fun getWeather(accessKey: String, q: String) {
         weatherUiState = WeatherUiState.Loading
         viewModelScope.launch {
-//            weatherUiState = try {
-//                val result = WeatherAPI.retrofitService.getWeather(
-//                    "47.00", "19.00", accessKey)
-//                WeatherUiState.Success(result)
-//            } catch (e: IOException) {
-//                WeatherUiState.Error
-//            } catch (e: HttpException) {
-//                WeatherUiState.Error
-//            }
-
-
+            weatherUiState = try {
                 val result = WeatherAPI.retrofitService.getWeather(
                     q, accessKey, "imperial")
-                weatherUiState = WeatherUiState.Success(result)
-
+                WeatherUiState.Success(result)
+            } catch (e: IOException) {
+                WeatherUiState.Error
+            } catch (e: HttpException) {
+                WeatherUiState.Error
+            }
         }
     }
 }

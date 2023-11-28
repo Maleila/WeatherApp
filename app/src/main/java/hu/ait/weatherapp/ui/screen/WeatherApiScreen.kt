@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -34,15 +35,15 @@ fun WeatherApiScreen(
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
+        when (weatherViewModel.weatherUiState) {
+            is WeatherUiState.Loading -> CircularProgressIndicator()
+            is WeatherUiState.Success -> ResultScreen((weatherViewModel.weatherUiState as WeatherUiState.Success).weatherResults)
+            is WeatherUiState.Error -> Text(text = "Error retrieving weather - try another city")
+        }
         Button(onClick = {
             weatherViewModel.getWeather("49324e494e65ef3e90e3497c07badf50", q)
         }) {
             Text(text = "Refresh")
-        }
-        when (weatherViewModel.weatherUiState) {
-            is WeatherUiState.Loading -> CircularProgressIndicator()
-            is WeatherUiState.Success -> ResultScreen((weatherViewModel.weatherUiState as WeatherUiState.Success).weatherResults)
-            is WeatherUiState.Error -> Text(text = "Error...")
         }
     }
 }
@@ -50,11 +51,11 @@ fun WeatherApiScreen(
 @Composable
 fun ResultScreen(weatherResults: WeatherResult) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "WEATHER")
+        Text(text = "${weatherResults.name}")
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data("https://openweathermap.org/img/w/${
@@ -66,12 +67,10 @@ fun ResultScreen(weatherResults: WeatherResult) {
             contentScale = ContentScale.Crop,
             modifier = Modifier.size(100.dp).clip(CircleShape)
         )
-        Text(text = "Place: ${weatherResults.name}")
-        Text(text = "Current temperature: ${weatherResults.main?.temp}")
-        Text(text = "Feels like: ${weatherResults.main?.feels_like}")
-        Text(text = "Temp min: ${weatherResults.main?.temp_min}")
-        Text(text = "Temp max: ${weatherResults.main?.temp_max}")
+        Text(text = "Current temperature: ${weatherResults.main?.temp}" + "\u2109")
+        Text(text = "Feels like: ${weatherResults.main?.feels_like}" + "\u2109")
+        Text(text = "High: ${weatherResults.main?.temp_max}" + "\u2109 | Low: ${weatherResults.main?.temp_min}" + "\u2109")
         Text(text = "${weatherResults.weather?.get(0)?.description}")
-        Text(text = "Humidity: ${weatherResults.main?.humidity}")
+        Text(text = "Humidity: ${weatherResults.main?.humidity}%")
     }
 }

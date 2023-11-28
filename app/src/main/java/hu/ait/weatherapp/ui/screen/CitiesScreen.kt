@@ -134,7 +134,7 @@ fun ItemCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(
-                    Modifier.fillMaxWidth(0.6f),
+                    Modifier.fillMaxWidth(0.9f),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(city)
@@ -170,7 +170,12 @@ private fun AddNewCityForm(
     }
 
     fun validateCity(text: String) {
-        cityErrorState = false
+        if (text.trim() == "" || text.length > 30) {
+            cityErrorState = true
+            errorText = "Please enter a city name"
+        } else {
+            cityErrorState = false
+        }
     }
 
     Dialog(
