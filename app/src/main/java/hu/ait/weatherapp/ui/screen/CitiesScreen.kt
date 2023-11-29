@@ -1,23 +1,18 @@
 package hu.ait.weatherapp.ui.screen
 
-// for a 'val' variable
 import androidx.compose.runtime.getValue
-// for a `var` variable also add
 import androidx.compose.runtime.setValue
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Delete
@@ -25,7 +20,6 @@ import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,20 +29,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
+import hu.ait.weatherapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,7 +55,7 @@ fun CitesScreen(
     Column {
         TopAppBar(
             title = {
-                Text(text="Weather app")
+                Text(text=stringResource(R.string.appName))
             },
             colors = TopAppBarDefaults.smallTopAppBarColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer
@@ -92,7 +83,7 @@ fun CitesScreen(
             }
 
             if (citiesViewModel.getAllCities().isEmpty())
-                Text(text = "no cities. add some!")
+                Text(text = stringResource(R.string.noCitiesMessage))
             else {
                 LazyColumn(modifier = Modifier.fillMaxHeight()) {
                     items(citiesViewModel.getAllCities()) {
@@ -121,7 +112,8 @@ fun ItemCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 10.dp
         ),
-        modifier = Modifier.padding(10.dp)
+        modifier = Modifier
+            .padding(10.dp)
             .clickable { onCardClicked() }
     ) {
         Column(
@@ -142,7 +134,7 @@ fun ItemCard(
                 }
                 Icon(
                     imageVector = Icons.Filled.Delete,
-                    contentDescription = "delete",
+                    contentDescription = stringResource(R.string.contentDescDelete),
                     modifier = Modifier.clickable {
                         onRemoveItem()
                     },
@@ -172,7 +164,7 @@ private fun AddNewCityForm(
     fun validateCity(text: String) {
         if (text.trim() == "" || text.length > 30) {
             cityErrorState = true
-            errorText = "Please enter a city name"
+            errorText = context.getString(R.string.cityNameErrorText)
         } else {
             cityErrorState = false
         }
@@ -200,7 +192,7 @@ private fun AddNewCityForm(
                 trailingIcon = {
                     if (cityErrorState) {
                         Icon(
-                            Icons.Filled.Warning, "Please enter a city",
+                            Icons.Filled.Warning, stringResource(R.string.errorContentDesc),
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -209,7 +201,7 @@ private fun AddNewCityForm(
                     city = it
                     validateCity(city)
                 },
-                label = { Text(text = "City name")}
+                label = { Text(text = stringResource(R.string.tfLabelCity))}
             )
             if (cityErrorState) {
                 Text(
@@ -230,7 +222,7 @@ private fun AddNewCityForm(
                         city = "" //reset fields to empty
                     }
                 }) {
-                    Text(text = "Add city")
+                    Text(text = stringResource(R.string.addButtonTxt))
                 }
 
             }

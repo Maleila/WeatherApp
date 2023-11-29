@@ -8,10 +8,6 @@ import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-// http://data.fixer.io/api/latest?access_key=969c37b5a73f8cb2d12c081dcbdc35e6
-
-//https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-
 private const val BASE_URL =
     "https://api.openweathermap.org/"
 

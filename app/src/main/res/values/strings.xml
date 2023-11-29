@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="appName">WeatherSense</string>
+    <string name="noCitiesMessage">No cities yet. Add some!</string>
+    <string name="contentDescDelete">delete</string>
+    <string name="cityNameErrorText">Please enter a city name</string>
+    <string name="errorContentDesc">Please enter a city</string>
+    <string name="tfLabelCity">City name</string>
+    <string name="addButtonTxt">Add city</string>
+    <string name="weatherResultErrorTxt">Error retrieving weather. Try another city!</string>
+    <string name="refreshBttn">Refresh</string>
+    <string name="iconContentDesc">Image</string>
+    <string name="currentTemp">Current temperature: %1$s</string>
+    <string name="feelsLike">Feels like: %1$s</string>
+    <string name="high">High: %1$s</string>
+    <string name="low">| Low: %1$s</string>
+    <string name="humidity">Humidity: %1$s</string>
+    <string name="degreesF">℉</string>
+    <string name="percent">%</string>
 </resources>

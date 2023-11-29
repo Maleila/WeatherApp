@@ -21,7 +21,6 @@ fun NavGraph(
         composable(Screen.Main.route) {
             CitesScreen(
                 onNavigateToWeatherScreen = { q ->
-                    // navigate to the main messages screen
                     navController.navigate("weatherapi/$q")
                 },
             )
